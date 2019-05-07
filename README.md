@@ -1,2 +1,2 @@
-# spring-boot-start
-spring-boot-start  风格打包中间件
+# spring-boot-package
+spring-boot-package  仿spring boot start 风格打包

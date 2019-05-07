@@ -1,0 +1,33 @@
+archivesBaseName = 'weblog'
+version = "${packWebLogVersion}"
+
+dependencies {
+    compileOnly group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: "${tomcatEmbedVersion}"
+    compileOnly group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+    compileOnly group: 'org.aspectj', name: 'aspectjweaver', version: "${aspectVersion}"
+    compileOnly group: 'org.springframework', name: 'spring-context', version: "${springVersion}"
+    compileOnly group: 'org.springframework', name: 'spring-web', version: "${springVersion}"
+    compileOnly group: 'com.alibaba', name: 'fastjson', version: "${fastjsonVersion}"
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${mavenThirdparty}") {
+                authentication(userName: "${mavenThirdpartyUserName}", password: "${mavenThirdpartyPwd}")
+            }
+            snapshotRepository(url: "${mavenSnapshot}") {
+                authentication(userName: "${mavenSnapshotUserName}", password: "${mavenSnapshotPwd}")
+            }
+            println "$version"
+            pom.version = "$version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
+}

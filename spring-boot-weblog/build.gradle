@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+    group 'com.springboot.base'
+    sourceCompatibility = 1.8
+    ext {
+        mavenUrl = "http://maven.aliyun.com/nexus/content/groups/public/"
+        fastjsonVersion = '1.2.54'
+        aspectVersion = '1.9.3'
+        slf4jVersion='1.7.26'
+        tomcatEmbedVersion="9.0.19"
+        springVersion = '5.1.6.RELEASE'
+        springBootVersion = '2.1.4.RELEASE'
+
+        mavenThirdparty = "http://maven.xxx.com/nexus/content/repositories/thirdparty"
+        mavenSnapshot = "http://maven.xxx.com/nexus/content/repositories/Snapshot"
+        mavenThirdpartyUserName = "xxx"
+        mavenThirdpartyPwd = "xxx"
+        mavenSnapshotUserName = "uploader"
+        mavenSnapshotPwd = "uploader"
+
+        packWebLogVersion = "0.0.1"
+    }
+    repositories {
+        maven {
+            url "${mavenUrl}"
+        }
+    }
+}

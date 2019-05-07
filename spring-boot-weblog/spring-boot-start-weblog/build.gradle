@@ -1,0 +1,24 @@
+archivesBaseName='spring-boot-start-weblog'
+version "${packWebLogVersion}"
+
+dependencies {
+    compile "com.springboot.base:weblog:${packWebLogVersion}"
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "${mavenThirdparty}") {
+                authentication(userName: "${mavenThirdpartyUserName}", password: "${mavenThirdpartyPwd}")
+            }
+            snapshotRepository(url: "${mavenSnapshot}") {
+                authentication(userName: "${mavenSnapshotUserName}", password: "${mavenSnapshotPwd}")
+            }
+            println "$version"
+            pom.version = "$version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
+}
